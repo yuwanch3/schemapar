@@ -6,16 +6,29 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-### Added
-
-- Indonesian translations of the README, guides, contributing guide and changelog.
-
 ### Planned
 
 - Rust codegen target.
-- Release `0.2.0`.
 - Additional target languages such as Java and C#.
 - Richer semantic format checks beyond the documented shapes.
+
+## [0.2.0] - 2026-11-24
+
+First public release on npm.
+
+### Added
+
+- Indonesian translations of the README, documentation guides, contributing guide and changelog, with language switchers on every English page.
+- `README.id.md` is included in the published package.
+- Repository, homepage and issue tracker metadata in `package.json`.
+
+### Changed
+
+- Documentation is split into matching English and Indonesian sets: `README.md`/`README.id.md`, `docs/`/`docs/id/`, `CONTRIBUTING.md`/`CONTRIBUTING.id.md`, `CHANGELOG.md`/`CHANGELOG.id.md` and `examples/README.md`/`examples/README.id.md`.
+
+### Fixed
+
+- Removed stray Python bytecode caches from the example directory and ignored them in Git.
 
 ## [0.1.0] - 2026-11-24
 
@@ -36,5 +49,6 @@ All notable changes to this project are documented here. The format follows [Kee
 - GitHub Actions CI for Node 18/20/22 with Python and Go, plus a package-install smoke test.
 - npm packaging metadata, typed exports, MIT license and `prepublishOnly` guard.
 
-[Unreleased]: https://github.com/yuwanch3/schemapar/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/yuwanch3/schemapar/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/yuwanch3/schemapar/releases/tag/v0.2.0
 [0.1.0]: https://github.com/yuwanch3/schemapar/releases/tag/v0.1.0

@@ -1,6 +1,6 @@
 {
   "name": "schemapar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Polyglot schema compiler + parity tester. Write a schema once, compile validators for multiple languages, and prove they behave identically.",
   "keywords": [
     "schema",
@@ -35,6 +35,7 @@
   "files": [
     "dist",
     "README.md",
+    "README.id.md",
     "LICENSE"
   ],
   "sideEffects": false,

@@ -236,7 +236,7 @@ Matriks test menjalankan typecheck, build, seluruh self-test, smoke test parity 
 
 ## Status dan roadmap
 
-Versi saat ini: **0.1.0**. Tipe node yang didukung: `string`, `number`, `integer`, `boolean`, `literal`, `enum`, `array`, `object`, `record`, `tuple`, `union`, `any`, plus constraint antar-field (`greaterThan`, `lessThan`, `greaterOrEqual`, `lessOrEqual`, `equal`, `notEqual`, `requiredTogether`) dan sembilan format string.
+Versi saat ini: **0.2.0**. Tipe node yang didukung: `string`, `number`, `integer`, `boolean`, `literal`, `enum`, `array`, `object`, `record`, `tuple`, `union`, `any`, plus constraint antar-field (`greaterThan`, `lessThan`, `greaterOrEqual`, `lessOrEqual`, `equal`, `notEqual`, `requiredTogether`) dan sembilan format string.
 
 Rencana:
 

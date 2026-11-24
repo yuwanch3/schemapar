@@ -6,16 +6,29 @@ Semua perubahan penting pada proyek ini didokumentasikan di sini. Format mengiku
 
 ## [Unreleased]
 
-### Ditambahkan
-
-- Terjemahan Bahasa Indonesia untuk README, panduan, panduan kontribusi, dan changelog.
-
 ### Direncanakan
 
 - Target codegen Rust.
-- Rilis `0.2.0`.
 - Bahasa target tambahan seperti Java dan C#.
 - Pengecekan format semantik yang lebih kaya di luar bentuk yang didokumentasikan.
+
+## [0.2.0] - 2026-11-24
+
+Rilis publik pertama di npm.
+
+### Ditambahkan
+
+- Terjemahan Bahasa Indonesia untuk README, panduan dokumentasi, panduan kontribusi, dan changelog, dengan language switcher di setiap halaman Inggris.
+- `README.id.md` disertakan dalam paket yang dipublikasikan.
+- Metadata repository, homepage, dan issue tracker di `package.json`.
+
+### Diubah
+
+- Dokumentasi dipisah menjadi pasangan Inggris dan Indonesia: `README.md`/`README.id.md`, `docs/`/`docs/id/`, `CONTRIBUTING.md`/`CONTRIBUTING.id.md`, `CHANGELOG.md`/`CHANGELOG.id.md`, dan `examples/README.md`/`examples/README.id.md`.
+
+### Diperbaiki
+
+- Menghapus cache bytecode Python yang tidak sengaja ada di direktori contoh dan mengabaikannya di Git.
 
 ## [0.1.0] - 2026-11-24
 
@@ -36,5 +49,6 @@ Semua perubahan penting pada proyek ini didokumentasikan di sini. Format mengiku
 - GitHub Actions CI untuk Node 18/20/22 dengan Python dan Go, plus smoke test instalasi paket.
 - Metadata packaging npm, export bertipe, lisensi MIT, dan guard `prepublishOnly`.
 
-[Unreleased]: https://github.com/yuwanch3/schemapar/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/yuwanch3/schemapar/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/yuwanch3/schemapar/releases/tag/v0.2.0
 [0.1.0]: https://github.com/yuwanch3/schemapar/releases/tag/v0.1.0

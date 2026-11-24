@@ -235,7 +235,7 @@ The test matrix runs typecheck, build, the full self-test suite, a CLI parity sm
 
 ## Status and roadmap
 
-Current release line: **0.1.0**. Supported node types: `string`, `number`, `integer`, `boolean`, `literal`, `enum`, `array`, `object`, `record`, `tuple`, `union`, `any`, plus cross-field constraints (`greaterThan`, `lessThan`, `greaterOrEqual`, `lessOrEqual`, `equal`, `notEqual`, `requiredTogether`) and nine string formats.
+Current release line: **0.2.0**. Supported node types: `string`, `number`, `integer`, `boolean`, `literal`, `enum`, `array`, `object`, `record`, `tuple`, `union`, `any`, plus cross-field constraints (`greaterThan`, `lessThan`, `greaterOrEqual`, `lessOrEqual`, `equal`, `notEqual`, `requiredTogether`) and nine string formats.
 
 Planned:
 
