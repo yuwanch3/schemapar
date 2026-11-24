@@ -1,0 +1,62 @@
+{
+  "name": "schemapar",
+  "version": "0.1.0",
+  "description": "Polyglot schema compiler + parity tester. Write a schema once, compile validators for multiple languages, and prove they behave identically.",
+  "keywords": [
+    "schema",
+    "validation",
+    "validator",
+    "codegen",
+    "typescript",
+    "python",
+    "go",
+    "parity",
+    "json-schema"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuwanch3/schemapar.git"
+  },
+  "homepage": "https://github.com/yuwanch3/schemapar#readme",
+  "bugs": {
+    "url": "https://github.com/yuwanch3/schemapar/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "bin": {
+    "schemapar": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx src/cli.ts",
+    "test": "tsx test/parity.test.ts",
+    "parity": "tsx src/cli.ts parity",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "typescript": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

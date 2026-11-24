@@ -1,0 +1,106 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Self-tests (TS + Python + Go)
+        run: npm test
+
+      - name: CLI parity smoke test
+        run: node dist/cli.js parity examples/user.schema.json --seed 7 --cases 100
+
+      - name: Generated examples are current
+        run: |
+          node dist/cli.js compile examples/user.schema.json --target ts --out examples/user.validator.ts
+          node dist/cli.js compile examples/user.schema.json --target py --out examples/user_validator.py
+          node dist/cli.js compile examples/user.schema.json --target go --out examples/user_validator.go
+          git diff --exit-code -- examples
+
+  package:
+    name: Package smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Pack
+        run: npm pack --pack-destination "$RUNNER_TEMP"
+
+      - name: Consumer install, typecheck, and runtime smoke test
+        run: |
+          mkdir -p "$RUNNER_TEMP/consumer"
+          cd "$RUNNER_TEMP/consumer"
+          npm init -y >/dev/null
+          npm pkg set type=module >/dev/null
+          npm install "$RUNNER_TEMP"/schemapar-*.tgz --no-audit --no-fund --ignore-scripts >/dev/null
+          cat > index.ts <<'EOF'
+          import { generateGo, parseSchema } from 'schemapar';
+          import type { SchemaNode } from 'schemapar';
+
+          const parsed = parseSchema({ type: 'string', format: 'email' });
+          if (!parsed.ok) throw new Error('bad schema');
+          const node: SchemaNode = parsed.schema;
+          void generateGo(node);
+          EOF
+          node node_modules/typescript/bin/tsc --noEmit --strict --target es2022 --module nodenext --moduleResolution nodenext index.ts
+          node --input-type=module -e "import('schemapar').then(async (m) => { const p = m.parseSchema({ type: 'string', minLength: 2 }); if (!p.ok) throw new Error('bad schema'); const r = await m.runParity(p.schema, { seed: 1, cases: 2, go: false }); if (r.mismatches.length) throw new Error('mismatch'); console.log('consumer OK', r.total); })"

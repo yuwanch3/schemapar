@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "email": { "type": "string", "format": "email" },
+    "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "age": { "type": "integer", "min": 0, "max": 150, "optional": true },
+    "role": { "type": "enum", "values": ["admin", "member", "guest"] },
+    "nickname": { "type": "string", "nullable": true, "maxLength": 20 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 24 },
+      "maxItems": 5
+    },
+    "contact": {
+      "type": "union",
+      "variants": [
+        { "type": "object", "additionalProperties": false, "properties": { "kind": { "type": "literal", "value": "email" }, "value": { "type": "string", "format": "email" } } },
+        { "type": "object", "additionalProperties": false, "properties": { "kind": { "type": "literal", "value": "phone" }, "value": { "type": "string", "pattern": "^[0-9]{8,15}$" } } }
+      ]
+    }
+  }
+}
